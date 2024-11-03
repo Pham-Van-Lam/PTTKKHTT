@@ -5,9 +5,6 @@
 package dao;
 
 import java.sql.CallableStatement;
-import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.sql.Date;
 import model.Donhang072;
 import model.Hoadon072;
@@ -43,26 +40,5 @@ public class Hoadon072DAO extends DAO {
             add = false;
         }
         return add;
-    }
-
-    public static void main(String[] args) {
-        Hoadon072 hoadon072 = new Hoadon072();
-        hoadon072.setId(12343);
-        hoadon072.setDate(new Date(System.currentTimeMillis()));
-        hoadon072.setTotal(1000.0);
-        hoadon072.setNote("Sample note");
-        Donhang072 donhang072 = new Donhang072();
-        donhang072.setId(37);
-        hoadon072.setDonhang072(donhang072);
-        NVgiaohang072 nVgiaohang072 = new NVgiaohang072();
-        nVgiaohang072.setId(60);
-        hoadon072.setnVgiaohang072(nVgiaohang072);
-        NVkho072 nVkho072 = new NVkho072();
-        nVkho072.setId(42);
-        hoadon072.setnVkho072(nVkho072);
-
-        Hoadon072DAO hdao = new Hoadon072DAO();
-        boolean success = hdao.addHoaDon(hoadon072);
-        System.out.println("Insert successful: " + success);
     }
 }

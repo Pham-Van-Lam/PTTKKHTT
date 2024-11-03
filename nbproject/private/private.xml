@@ -12,10 +12,12 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/NETBIN/WEBQLCHDM/src/java/model/Hoadon072.java</file>
+            <file>file:/D:/NETBIN/WEBQLCHDM/web/nvk/gdChinhNVK072.jsp</file>
+            <file>file:/D:/NETBIN/WEBQLCHDM/web/nvk/gdDonCD072.jsp</file>
             <file>file:/D:/NETBIN/WEBQLCHDM/web/nvk/gdHoaDon072.jsp</file>
+            <file>file:/D:/NETBIN/WEBQLCHDM/web/nvk/gdDuyetDon072.jsp</file>
+            <file>file:/D:/NETBIN/WEBQLCHDM/web/nvk/gdChonNVGH072.jsp</file>
             <file>file:/D:/NETBIN/WEBQLCHDM/web/nvk/doHoaDon072.jsp</file>
-            <file>file:/D:/NETBIN/WEBQLCHDM/src/java/dao/Hoadon072DAO.java</file>
         </group>
     </open-files>
 </project-private>

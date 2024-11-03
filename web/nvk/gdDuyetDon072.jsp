@@ -16,6 +16,21 @@
     Donhang072DAO donhang072DAO = new Donhang072DAO();
     ArrayList<Donhang072> donhang072s = (ArrayList<Donhang072>) donhang072DAO.getDSDonChuaDuyet();
     session.setAttribute("dsDH", donhang072s);
+
+    String action = request.getParameter("action");
+    if (action != null && action.equals("donhang")) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        //ArrayList<Donhang072> donhang072s = (ArrayList<Donhang072>) session.getAttribute("dsDH");
+        Donhang072 donhang072 = donhang072s.stream()
+                .filter(dh -> dh.getId() == id)
+                .findFirst()
+                
+                .orElse(null);
+        session.setAttribute("donhang", donhang072);
+        response.sendRedirect("gdDonCD072.jsp");
+        return;
+    }
+
 %>
 
 <!DOCTYPE html>
@@ -30,24 +45,24 @@
                 color: #333;
                 margin: 0;
                 padding: 20px;
-                text-align: center; /* Center text */
+                text-align: center;
             }
             h1 {
                 color: #4CAF50;
             }
             .greeting {
-                text-align: right; /* Align text to the right */
-                margin-bottom: 20px; /* Space below greeting */
-                font-size: 14px; /* Smaller font size */
+                text-align: right;
+                margin-bottom: 20px;
+                font-size: 14px;
             }
             .logout {
                 color: #4CAF50;
-                text-decoration: none; /* Remove underline */
-                font-weight: bold; /* Make the logout link bold */
-                margin-left: 10px; /* Space between greeting and logout link */
+                text-decoration: none;
+                font-weight: bold;
+                margin-left: 10px;
             }
             .logout:hover {
-                text-decoration: underline; /* Underline on hover */
+                text-decoration: underline;
             }
             table {
                 width: 100%;
@@ -67,27 +82,38 @@
                 color: white;
             }
             tr:nth-child(even) {
-                background-color: #f2f2f2; /* Light grey for even rows */
+                background-color: #f2f2f2;
             }
             tr:nth-child(odd) {
-                background-color: #ffffff; /* White for odd rows */
+                background-color: #ffffff;
             }
             tr:hover {
-                background-color: #e0e0e0; /* Highlight on hover */
-                cursor: pointer; /* Change cursor to pointer on hover */
+                background-color: #e0e0e0;
+            }
+            .back-button {
+                margin-top: 20px;
+                padding: 10px 20px;
+                font-size: 16px;
+                color: white;
+                background-color: #4CAF50;
+                border: none;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+            .back-button:hover {
+                background-color: #45a049;
+            }
+            .order-link {
+                color: #000; /* Set text color to black */
+                text-decoration: none; /* Remove underline */
             }
         </style>
-        <script type="text/javascript">
-            function redirectToDetails(event, id) {
-                window.location.href = 'doDuyetDon072.jsp?action=donhang&id=' + id;
-            }
-        </script>
     </head>
     <body>
         <h1>Duyệt đơn hàng</h1>
         <div class="greeting">
-            Xin chào: <%= nvk.getName()%> - MNV: <%= nvk.getId()%>
-            <a href="gdDangnhap072.jsp" class="logout">Đăng xuất</a> <!-- Logout link -->
+            Xin chào: <%= nvk.getName() %> - MNV: <%= nvk.getId() %>
+            <a href="gdDangnhap072.jsp" class="logout">Đăng xuất</a>
         </div>
         <%
             if (donhang072s == null || donhang072s.isEmpty()) {
@@ -110,13 +136,14 @@
             <tbody>
                 <%
                     for (Donhang072 donhang : donhang072s) {
+                        String link = "gdDuyetDon072.jsp?action=donhang&id=" + donhang.getId();
                 %>
-                <tr onclick="redirectToDetails(event, '<%= donhang.getId() %>')">
-                    <td><%= donhang.getId() %></td>
-                    <td><%= donhang.getKhachhang072().getName() %></td>
-                    <td><%= donhang.getDate() %></td>
-                    <td><%= decimalFormat.format(donhang.getTotal()) %></td>
-                    <td><%= donhang.getStatus() %></td>
+                <tr>
+                    <td><a href="<%= link %>" class="order-link"><%= donhang.getId() %></a></td>
+                    <td><a href="<%= link %>" class="order-link"><%= donhang.getKhachhang072().getName() %></a></td>
+                    <td><a href="<%= link %>" class="order-link"><%= donhang.getDate() %></a></td>
+                    <td><a href="<%= link %>" class="order-link"><%= decimalFormat.format(donhang.getTotal()) %></a></td>
+                    <td><a href="<%= link %>" class="order-link"><%= donhang.getStatus() %></a></td>
                 </tr>
                 <%
                     }
@@ -126,7 +153,9 @@
         <%
             }
         %>
+
+        <!-- Back button -->
+        <a href="gdChinhNVK072.jsp"><button class="back-button">Quay lại</button></a>
+
     </body>
 </html>
-
-

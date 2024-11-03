@@ -37,7 +37,7 @@
 
     Khachhang072 khachhang = donhang != null ? donhang.getKhachhang072() : null;
     ArrayList<Mathangmua072> mathangmua072s = donhang != null ? (ArrayList<Mathangmua072>) donhang.getMathangmua072s() : new ArrayList<>();
-    DecimalFormat currencyFormat = new DecimalFormat("#,### VND");
+    DecimalFormat currencyFormat = new DecimalFormat("#,###");
 
     // Format the date
     SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm dd-MM-yyyy");
@@ -153,7 +153,7 @@
     <div>
         <h2 class="meg"><%= meg %></h2>
         <%
-            if ("Thành công".equals(meg)) { 
+            if ("Tạo hóa đơn thành công".equals(meg)) { 
         %>
         <script>
             window.onload = function () {
@@ -197,8 +197,8 @@
                     <th>Mã hàng</th>
                     <th>Tên hàng</th>
                     <th>Số lượng</th>
-                    <th>Đơn giá</th>
-                    <th>Thành tiền</th>
+                    <th>Đơn giá (VNĐ)</th>
+                    <th>Thành tiền (VNĐ)</th>
                 </tr>
             </thead>
             <tbody>
@@ -216,7 +216,7 @@
 
         <!-- Total -->
         <div class="total">
-            <p>Tổng tiền phải thanh toán: <%= currencyFormat.format(hoadon072.getTotal()) %></p>
+            <p>Tổng tiền phải thanh toán: <%= currencyFormat.format(hoadon072.getTotal()) %> VNĐ</p>
         </div>
         <div class="signature" style="margin-bottom: 50px;">
             <p>Người tạo hóa đơn: <%= nvk.getName() %> - MNV: <%= nvk.getId() %></p>

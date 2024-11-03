@@ -9,7 +9,6 @@ import model.NVgiaohang072;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
 /**
  *
  * @author LamPham
@@ -48,16 +47,4 @@ public class NVgiaohang072DAO extends DAO{
         
         return nVgiaohang072s;
     }
-    
-    public static void main(String[] args) {
-        NVgiaohang072DAO nVgiaohang072DAO = new NVgiaohang072DAO();
-        
-        List<NVgiaohang072> list = nVgiaohang072DAO.getDSNVGH();
-        
-        for (NVgiaohang072 nVgiaohang072 : list) {
-            System.out.println(nVgiaohang072.getVitri());
-            System.out.println("giao hàng");
-        }
-    }
-    
 }

@@ -4,7 +4,24 @@
     Author     : LamPham
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.ArrayList,dao.*,model.*"%>
+<%
+    // Lấy tham số `action` từ URL
+    String action = request.getParameter("action");
+
+    if (action != null) {
+        if (action.equals("dangky")) {
+            response.sendRedirect("gdChinhKH072.jsp");
+        } else if (action.equals("timhang")) {
+            response.sendRedirect("gdTimMH072.jsp");
+        } else {
+            response.sendRedirect("gdChinhKH072.jsp");
+        }
+    }
+   
+    
+%>
+
 <!DOCTYPE html>
 <html lang="vi">
     <head>
@@ -73,12 +90,12 @@
             <h1>Trang chủ khách hàng</h1>
 
             <!-- Đăng ký thành viên -->
-            <a href="doChinhKH072.jsp?action=dangky">
+            <a href="gdChinhKH072.jsp?action=dangky">
                 <button>Đăng ký thành viên</button>
             </a>
 
             <!-- Tìm mặt hàng -->
-            <a href="doChinhKH072.jsp?action=timhang">
+            <a href="gdChinhKH072.jsp?action=timhang">
                 <button>Tìm mặt hàng</button>
             </a>
         </div>

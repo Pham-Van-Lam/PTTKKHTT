@@ -20,11 +20,12 @@ public class Hoadon072 implements Serializable{
     private Donhang072 donhang072;
     private NVgiaohang072 nVgiaohang072;
     private NVkho072 nVkho072;
+    private NVbanhang072 nVbanhang072;
 
     public Hoadon072() {
     }
 
-    public Hoadon072(int id, Date date, double total, String note, Donhang072 donhang072, NVgiaohang072 nVgiaohang072, NVkho072 nVkho072) {
+    public Hoadon072(int id, Date date, double total, String note, Donhang072 donhang072, NVgiaohang072 nVgiaohang072, NVkho072 nVkho072, NVbanhang072 nVbanhang072) {
         this.id = id;
         this.date = date;
         this.total = total;
@@ -32,6 +33,7 @@ public class Hoadon072 implements Serializable{
         this.donhang072 = donhang072;
         this.nVgiaohang072 = nVgiaohang072;
         this.nVkho072 = nVkho072;
+        this.nVbanhang072 = nVbanhang072;
     }
 
     public int getId() {
@@ -89,15 +91,18 @@ public class Hoadon072 implements Serializable{
     public void setnVkho072(NVkho072 nVkho072) {
         this.nVkho072 = nVkho072;
     }
-    
-    public String formattedDate(){
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        return formatter.format(this.date);
+
+    public NVbanhang072 getnVbanhang072() {
+        return nVbanhang072;
+    }
+
+    public void setnVbanhang072(NVbanhang072 nVbanhang072) {
+        this.nVbanhang072 = nVbanhang072;
     }
 
     @Override
     public String toString() {
-        return "Hoadon072{" + "id=" + id + ", date=" + date + ", total=" + total + ", note=" + note + ", donhang072=" + donhang072 + ", nVgiaohang072=" + nVgiaohang072 + ", nVkho072=" + nVkho072 + '}';
+        return "Hoadon072{" + "id=" + id + ", date=" + date + ", total=" + total + ", note=" + note + ", donhang072=" + donhang072 + ", nVgiaohang072=" + nVgiaohang072 + ", nVkho072=" + nVkho072 + ", nVbanhang072=" + nVbanhang072 + '}';
     }
     
 }

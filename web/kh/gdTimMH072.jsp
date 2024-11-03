@@ -5,7 +5,46 @@
 --%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" import="java.util.ArrayList,java.util.List,java.text.DecimalFormat,dao.*,model.*"%>
+         pageEncoding="UTF-8" import="java.util.ArrayList,java.util.List,java.net.URLEncoder,java.text.DecimalFormat,dao.*,model.*"%>
+<%
+    String tenMH = request.getParameter("tenMH");
+    if (tenMH != null) {
+        Mathang072DAO mathang072DAO = new Mathang072DAO();
+        List<Mathang072> mathangs = mathang072DAO.getDSMatHang(tenMH);
+
+        session.setAttribute("dsMH", mathangs);
+        String encodedTenMH = URLEncoder.encode(tenMH, "UTF-8");
+        System.out.println(tenMH);
+        
+    }
+
+    String action = request.getParameter("action");
+    if (action != null) {
+        if (action.equals("chitietMH")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            List<Mathang072> mathangs = (ArrayList<Mathang072>) session.getAttribute("dsMH");
+            if (mathangs != null) {
+                Mathang072 mathang072 = mathangs.stream()
+                        .filter(mh -> mh.getId() == id)
+                        .findFirst()
+                        .orElse(null);
+
+                if (mathang072 != null) {
+                    session.setAttribute("chitietMH", mathang072);
+                    response.sendRedirect("gdChiTietMH072.jsp");
+                    return;
+                }
+            } else {
+                response.sendRedirect("gdTimMH072.jsp");
+            }
+            return;
+        } else if (action.equals("trangchu")) {
+            session.setAttribute("dsMH", null);
+            response.sendRedirect("gdChinhKH072.jsp");
+        }
+    }
+
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -101,7 +140,7 @@
         </style>
         <script type="text/javascript">
             function redirectToDetails(id) {
-                window.location.href = 'doTimMH072.jsp?action=chitietMH&id=' + id;
+                window.location.href = 'gdTimMH072.jsp?action=chitietMH&id=' + id;
             }
         </script>
     </head>
@@ -109,14 +148,13 @@
         <div class="container">
             <h1>Tìm mặt hàng</h1>
             <div>
-                <form name="timmathang" action="doTimMH072.jsp" accept-charset="UTF-8">
+                <form name="timmathang" action="gdTimMH072.jsp" accept-charset="UTF-8">
                     <input type="text" name="tenMH" id="tenMH" placeholder="Nhập tên mặt hàng cần tìm kiếm tại đây..." required />
                     <input type="submit" value="Tìm" />
                 </form>
             </div>
 
-            <%
-                // Tạo đối tượng DecimalFormat để định dạng giá
+            <%                // Tạo đối tượng DecimalFormat để định dạng giá
                 DecimalFormat decimalFormat = new DecimalFormat("#,###.##");
 
                 List<Mathang072> mathangs = (ArrayList<Mathang072>) session.getAttribute("dsMH");
@@ -125,7 +163,6 @@
             <h4 class="error-message">Không tìm thấy mặt hàng vui lòng nhập lại!</h4>
             <%
             } else if (mathangs != null && !mathangs.isEmpty()) {
-                String tenMH = request.getParameter("tenMH");
             %>
             <h2>Danh sách mặt hàng cho từ khóa: <%= tenMH == null ? "" : tenMH%> (Tìm thấy <%= mathangs.size()%> sản phẩm)</h2>
             <table>
@@ -157,7 +194,7 @@
             %>
 
             <!-- Nút quay lại -->
-            <a href="doTimMH072.jsp?action=trangchu" class="back-button">Quay lại trang chính</a>
+            <a href="gdChinhKH072.jsp" class="back-button">Quay lại trang chính</a>
         </div>
     </body>
 </html>

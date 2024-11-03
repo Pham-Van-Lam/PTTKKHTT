@@ -28,8 +28,20 @@
     }
 
     nVgiaohang072 = (NVgiaohang072) session.getAttribute("nvgh");
+    
+    String msg = "";
+    String trangthai = request.getParameter("orderStatus");
+    Donhang072DAO donhang072DAO = new Donhang072DAO();
+    boolean check = donhang072DAO.updateTrangThaiDH(donhang.getId(), trangthai);
 
-    String msg = request.getParameter("msg") != null ? java.net.URLDecoder.decode(request.getParameter("msg"), "UTF-8") : "";
+    if (check) {
+        donhang.setStatus(trangthai);
+        session.setAttribute("donhang", donhang);
+        msg = "Success: Order status updated.";
+    } else {
+        msg = "Error: Failed to update order status.";
+        
+    }
 
     String xuatkhohang = request.getParameter("xuatkhohang");
     if (xuatkhohang !=  null && xuatkhohang.equals("xuatkho")) {
@@ -189,7 +201,7 @@
             <h2>Nhân viên giao hàng: <%= nVgiaohang072 != null ? nVgiaohang072.getName() : "Chưa chọn nhân viên giao hàng"%></h2>
 
             <div class="status-container">
-                <form action="doChonNVGH072.jsp" method="post">
+                <form action="gdChonNVGH072.jsp" method="post">
                     <input type="hidden" name="donhangId" value="<%= donhang.getId()%>">
                     <label for="status">Trạng Thái Đơn Hàng</label>
                     <select id="status" name="orderStatus">

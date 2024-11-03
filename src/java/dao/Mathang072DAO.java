@@ -46,18 +46,4 @@ public class Mathang072DAO extends DAO {
 
         return mathang072s;
     }
-
-    public static void main(String[] args) {
-        Mathang072DAO mdao = new Mathang072DAO();
-
-        List<Mathang072> list = mdao.getDSMatHang("máy");
-
-        if (!list.isEmpty()) {
-            for (Mathang072 mathang072 : list) {
-                System.out.println(mathang072);
-            }
-        }
-
-    }
-
 }
